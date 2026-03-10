@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import './bootstrap/bootstrap.min.css'
+import './bootstrap/bootstrap.min.js'
+import Nav from './components/nav.jsx'
+import Header from './components/header.jsx'
 
 function App() {
   
@@ -14,6 +18,11 @@ function App() {
 
   return (
     <>
+
+      <Header></Header>
+
+      <Nav></Nav>
+      
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
