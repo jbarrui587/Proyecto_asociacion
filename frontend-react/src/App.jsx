@@ -1,23 +1,25 @@
 //import { useState, useEffect } from 'react'
 import './styles/App.css'
-import Nav from './components/nav.jsx'
-import Header from './components/header.jsx'
-import Footer from './components/footer.jsx'
-import Home from './components/index.jsx'
+import Landing from './pages/home'
 
 function App() {
   
   
   return (
     <>
+      <BrowserRouter>
+        <Routes>
+          {/* Ruta principal */}
+        <Route path="/" element={<Landing />} />
 
-      <Header></Header>
+          {/* Ruta usuarios */}
+          <Route path="/noticias" element={<Noticias />} />
 
-      <Nav></Nav>
-
-      <Home></Home>
-
-      <Footer></Footer>
+          {/* Ruta 404 */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+      
 
       
     </>
