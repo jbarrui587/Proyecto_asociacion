@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient 
 from passlib.hash import pbkdf2_sha256
 import os
 from dotenv import load_dotenv
@@ -12,7 +12,7 @@ class BaseDatos:
 
             # Conexión a MongoDB
             self.client = MongoClient(mong_url)
-            self.db = self.client["Python_Bank"]
+            self.db = self.client["Asociación"]
 
             self.inicializar_colecciones()
 
@@ -22,7 +22,7 @@ class BaseDatos:
             print(f"\n❌ Falló la conexión a MongoDB: {e}")
 
     def inicializar_colecciones(self):
-        colecciones = ['Miembros', 'Noticias', '']
+        colecciones = ['Miembros', 'Noticias']
         col_existentes = self.db.list_collection_names()
 
         for coleccion in colecciones:
@@ -34,60 +34,59 @@ class BaseDatos:
         
         #Sólo se ejecutará si la tabla usuarios está vacía
 
-        if self.db['usuarios'].count_documents({}) == 0:
+        if self.db['Miembros'].count_documents({}) == 0:
             
-            passwd = "admin123"
+            passwd = "Admin123"
             pass_hashed = pbkdf2_sha256.hash(passwd)
 
             usuario_inicial = {
-                "dni": "99999999Z",
-                "nombre": "Admin",
-                "apellidos": "De la App",
-                "telefono": "600123213",
-                "email": "admin@pythonbank.com",
                 "username": "adminuser",
                 "password": pass_hashed,
+                "nombre": "Admin",
+                "apellidos": "De la App",
+                "dni": "99999999Z",
+                "telefono": "600123213",
+                "email": "admin@asociacion.com",
                 "rol": "admin"
             }
-            self.db['usuarios'].insert_one(usuario_inicial)
-            print("👤 Usuario administrador insertado en la colección 'usuarios'.")
+            self.db['Miembros'].insert_one(usuario_inicial)
+            print("👤 Usuario administrador insertado en la colección 'Miembros'.")
         else:
-            print("⚠️ La colección 'usuarios' ya contiene registros.")
+            print("⚠️ La colección 'Miembros' ya contiene registros.")
 
-    def insertar_user(self, user):
-        self.db['usuarios'].insert_one(user)
+    def insertar_miembro(self, user):
+        self.db['Miembros'].insert_one(user)
 
-    def lista_usuarios(self,usuarios):
-        return list(usuarios.find())
+    def lista_miembros(self,Miembros):
+        return list(Miembros.find())
     
-    def comprueba_registro(self, lista_usuarios, nuevo_usuario):
+    def comprueba_registro(self, lista_miembro, nuevo_miembro):
 
         ### Devuelve un valor en función del error ###
 
-        for usuario in lista_usuarios:
-            print(usuario)
-            if usuario['dni'] == nuevo_usuario['dni']:
+        for miembro in lista_miembro:
+            print(miembro)
+            if miembro['dni'] == nuevo_miembro['dni']:
                 return 1
 
-            elif usuario['telefono'] == nuevo_usuario['telefono']:
+            elif miembro['telefono'] == nuevo_miembro['telefono']:
                 return 2
 
-            elif usuario['email'] == nuevo_usuario['email']:
+            elif miembro['email'] == nuevo_miembro['email']:
                 return 3
 
-            elif usuario['username'] == nuevo_usuario['username']:
+            elif miembro['username'] == nuevo_miembro['username']:
                 return 4
             
         return 0
 
-    def lista_cuentas(self,cuentas):
-        return list(cuentas.find())
+    def lista_noticias(self,Noticias):
+        return list(Noticias.find())
     
-    def insertar_cuenta(self,cuenta):
-        self.db['cuenta_bancaria'].insert_one(cuenta)
+    def insertar_noticia(self,noticia):
+        self.db['Noticias'].insert_one(noticia)
 
-    def lista_transacciones(self,transacciones):
-        return list(transacciones.find())
+
 
     # Nos devuelve la coleccion (tabla) cuyo nombre le especifiquemos
     def obtener_colecciones(self,nombre):

@@ -1,20 +1,37 @@
+import { useEffect, useState } from "react";
+import Carta_noticia from '../components/carta_noticia'
 
 
 function Noticias() {
+
+  const [noticias, setNoticias] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/noticias")
+      .then(res => res.json())
+      .then(data => setNoticias(data))
+      .catch(err => console.error("Error:", err));
+  }, []);
+
+
     return (
       <>
        
         <main className="contenido">
-          <div className="texto">
-            <h2>Bienvenidos</h2>
-            <p>
-              Texto de la asociación explicando vuestra actividad.
-            </p>
-          </div>
-  
-          <div className="imagen">
-            <img src="/src/assets/images/asoc_7.png" alt="Presentación de la asociación" />
-          </div>
+          <h1>Noticias y Eventos</h1>
+
+          {noticias.length === 0 ? (
+        <p>No hay noticias</p>
+      ) : (
+        noticias.map((noticia) => (
+          <Carta_noticia
+            id={noticia.id}
+            titulo={noticia.titulo}
+            descripcion={noticia.descripcion}
+            imagen={noticia.imagen}
+          />
+        ))
+      )}
         </main>
       </>
     )
