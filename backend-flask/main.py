@@ -18,7 +18,7 @@ def App():
 @app.route('/api/noticias')
 def get_noticias():
     data = list(noticias_col.find())
-    print("DATOS MONGO:", data)
+   
 
     noticias = []
     for noticia in data:
@@ -30,23 +30,11 @@ def get_noticias():
 
     return jsonify(noticias)
 
-@app.route('/api/users')
-def get_users():
+@app.route('/api/galeria')
+def get_fotos():
     return {
-        'users': [
-            {
-                'id': 1,
-                'name': 'Alice'
-            },
-            {
-                'id': 2,
-                'name': 'Bob'
-            },
-            {
-                'id': 3,
-                'name': 'Charlie'
-            }
-        ]
+        
+
     }
 
 @app.route('/api/fruits')

@@ -1,15 +1,20 @@
-function carta_noticia(titulo,descripcion,imagen){
-    return(
-        <div>
-            <div>
-                <h3>{titulo}</h3>
-                <p>{descripcion}</p>
-            </div>
-            <div>
-                <img src={imagen} alt={titulo} />
-            </div>
-        </div>
-    )
-}
+import '../styles/carta_noticia.css'
 
-export default carta_noticia
+function Carta_noticia({ titulo, descripcion, imagen }) {
+    return (
+      <div className="carta-noticia">
+        
+        <div className="carta-contenido">
+          <h3>{titulo}</h3>
+          <p>{descripcion}</p>
+        </div>
+  
+        <div className="carta-imagen">
+          <img src={imagen} alt={titulo} />
+        </div>
+  
+      </div>
+    );
+  }
+  
+  export default Carta_noticia;

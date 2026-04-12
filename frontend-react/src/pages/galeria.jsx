@@ -1,3 +1,5 @@
+import Carta_foto from "../components/carta_foto";
+
 function Galeria() {
     return (
       <>

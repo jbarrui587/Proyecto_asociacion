@@ -12,7 +12,7 @@ class BaseDatos:
 
             # Conexión a MongoDB
             self.client = MongoClient(mong_url)
-            self.db = self.client["Asociación"]
+            self.db = self.client["Asociacion"]
 
             self.inicializar_colecciones()
 
@@ -22,7 +22,7 @@ class BaseDatos:
             print(f"\n❌ Falló la conexión a MongoDB: {e}")
 
     def inicializar_colecciones(self):
-        colecciones = ['Miembros', 'Noticias']
+        colecciones = ['Miembros', 'Noticias','Galeria']
         col_existentes = self.db.list_collection_names()
 
         for coleccion in colecciones:
