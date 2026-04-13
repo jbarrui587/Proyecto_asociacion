@@ -10,6 +10,7 @@ db =BaseDatos()
 
 noticias_col = db.obtener_colecciones('Noticias')
 miembros_col = db.obtener_colecciones('Miembros')
+galeria_col = db.obtener_colecciones('Galeria')
 
 @app.route('/')
 def App():
@@ -32,10 +33,19 @@ def get_noticias():
 
 @app.route('/api/galeria')
 def get_fotos():
-    return {
-        
+    
+    data = list(galeria_col.find())
+   
+    galeria = []
+    for foto in data:
+        galeria.append({
+            "imagen": foto.get("imagen"),
+            "titulo": foto.get("titulo")
+        })
 
-    }
+    return jsonify(galeria)
+
+    
 
 @app.route('/api/fruits')
 def get_fruits():

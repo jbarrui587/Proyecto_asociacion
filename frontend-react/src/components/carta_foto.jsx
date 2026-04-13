@@ -1,6 +1,8 @@
+import '../styles/carta_foto.css'
+
 function Carta_foto({imagen,titulo}){
     return(
-        <div>
+        <div className="carta-foto">
             <div>
                  <img src={imagen} alt={titulo} />
             </div>

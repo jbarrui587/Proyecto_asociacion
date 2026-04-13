@@ -1,23 +1,38 @@
+import { useEffect, useState } from "react";
 import Carta_foto from "../components/carta_foto";
+import "../styles/galeria.css";
 
 function Galeria() {
-    return (
-      <>
-       
-        <main className="contenido">
-          <div className="texto">
-            <h2>Bienvenidos</h2>
-            <p>
-              Texto de la asociación explicando vuestra actividad.
-            </p>
-          </div>
-  
-          <div className="imagen">
-            <img src="/src/assets/images/asoc_7.png" alt="Presentación de la asociación" />
-          </div>
-        </main>
-      </>
-    )
-  }
-  
-  export default Galeria
+  const [fotos, setFotos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/galeria")
+      .then(res => res.json())
+      .then(data => {
+        setFotos(data);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  return (
+    <div>
+      <h1>Galería</h1>
+
+      {fotos.length === 0 ? (
+        <p>No hay Fotos</p>
+      ) : (
+        <div className="galeria">
+          {fotos.map((foto, index) => (
+            <Carta_foto
+              key={index}
+              titulo={foto.titulo}
+              imagen={foto.imagen}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Galeria;

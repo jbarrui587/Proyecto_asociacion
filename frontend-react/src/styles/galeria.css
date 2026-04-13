@@ -1,0 +1,15 @@
+/* Título */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--color-fuente1);
+  }
+  
+  /* Contenedor galería */
+  .galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 30px;
+  }
