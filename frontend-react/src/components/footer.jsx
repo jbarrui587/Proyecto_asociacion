@@ -5,7 +5,8 @@ function Footer(){
         <footer>
             <div id='Asoc'>
                 <p>@ Copyright | Asociación de agua Natural Abderitana</p>
-                
+                <p>Información de Socio</p>
+                <p>Información sobre Marco Legal</p>
             </div>
             <div>
 
