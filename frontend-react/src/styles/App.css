@@ -9,6 +9,11 @@
   padding: 15px;
 }
 
+#header img{
+    background-color: #FFFFFF;
+    border-radius: 50px;
+}
+
 /* NAV */
 nav {
   background-color: var(--color-secundario);
