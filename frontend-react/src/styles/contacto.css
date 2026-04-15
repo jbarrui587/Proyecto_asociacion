@@ -4,6 +4,9 @@
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
   }
   
   /* Título */
@@ -11,13 +14,6 @@
     text-align: center;
     color: var(--color-fuente1);
     margin-bottom: 40px;
-  }
-  
-  /* Layout en dos columnas */
-  #principal {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
   }
   
   /* Columna izquierda */

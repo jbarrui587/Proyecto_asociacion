@@ -1,4 +1,3 @@
-//import { useState, useEffect } from 'react'
 import './styles/App.css'
 import { Routes, Route } from 'react-router-dom'
 
@@ -12,6 +11,8 @@ import Galeria from './pages/galeria'
 import QuienesSomos from './pages/quienes_somos'
 import Contacto from './pages/contacto'
 import Login from './pages/login'
+import Legal from './pages/legal'
+import Socio from './pages/socio'
 import NotFound from './pages/notFound'
 
 
@@ -42,6 +43,12 @@ function App() {
 
           {/* Ruta Login */}
           <Route path="/login" element={<Login/>}/>
+
+          {/* Ruta Marco Legal */}
+          <Route path="/legal" element={<Legal/>}/>
+
+          {/* Ruta Información de Socio */}
+          <Route path="/socio" element={<Socio/>}/>
 
           {/* Ruta 404 */}
           <Route path="*" element={<NotFound />} />

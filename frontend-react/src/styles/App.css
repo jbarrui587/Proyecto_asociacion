@@ -47,3 +47,33 @@ footer {
   justify-content: space-between;
   padding: 20px;
 }
+
+footer a{
+  font-weight: bold;
+  text-decoration: none;
+  color:var(--color-fuente1);
+}
+
+footer a:hover{
+  color:var(--color-primario);
+}
+footer img{
+  width: 4%;
+}
+
+footer div{
+  flex:1;
+}
+
+#redes{
+  text-align: end;
+}
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+  }
+  #redes{
+    text-align: start;
+  }
+}

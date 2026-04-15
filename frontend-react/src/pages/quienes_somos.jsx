@@ -1,4 +1,5 @@
 import "../styles/quienes_somos.css";
+import fichaInscripcion from '../assets/documents/ficha_inscripción.pdf'
 
 function QuienesSomos() {
     return (
@@ -73,7 +74,7 @@ Nuestra actividad se desarrolla desde una perspectiva técnica, ambiental y soci
               <li>Forma parte de una red plural.</li>
               <li>Apoya la defensa del agua y del territorio.</li>
             </ul>
-            <a href="../assets/documents/ficha inscripción Asc.pdf">Descargar Ficha de Inscripción de la Asociación</a>
+            <a href={fichaInscripcion} download>Descargar Ficha de Inscripción de la Asociación</a>
             
             <p><br></br>Más información en el enlace de la parte inferior de la página.</p>
           </div>
