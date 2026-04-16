@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  
+    width: 100%;
     min-height: 70vh;
   }
   
@@ -19,7 +19,7 @@
     flex-direction: column;
     gap: 15px;
   
-    width: 300px;
+    width: 450px; 
   
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   }
@@ -28,74 +28,87 @@
   h1 {
     text-align: center;
     color: var(--color-fuente1);
-    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
-  /* Labels */
-  #login label {
+  /* Grupo label + input */
+  .form-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* Label alineado */
+  .form-group label {
+    width: 140px;          
+    text-align: right;
     font-weight: bold;
     color: var(--color-fuente1);
   }
   
-  /* Inputs */
-  #login input[type="text"],
-  #login input[type="password"],
-  #login input[type="tel"],
-  #login input[type="email"] {
+  /* Input */
+  .form-group input {
+    flex: 1;
+    min-width: 0;
+  
     padding: 10px;
     border-radius: 8px;
     border: 1px solid var(--color-auxiliar);
     outline: none;
   
-    transition: border 0.3s;
+    transition: all 0.3s;
   }
   
   /* Focus */
-  #login input[type="text"]:focus,
-  #login input[type="password"]:focus {
+  .form-group input:focus {
     border: 1px solid var(--color-primario);
+    box-shadow: 0 0 5px rgba(39, 33, 239, 0.3); 
   }
-
-  #login input[type="text"]:not(:placeholder-shown),
-  #login input[type="password"]:not(:placeholder-shown)
-  #login input[type="text"]:not(:placeholder-shown),
-  #login input[type="password"]:not(:placeholder-shown),
-  #login input[type="tel"]:not(:placeholder-shown),
-  #login input[type="email"]:not(:placeholder-shown) {
+  
+  /* Input con contenido */
+  .form-group input:not(:placeholder-shown) {
     border-color: var(--color-secundario);
+  }
+  
+  /* BOTONES */
+  .botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Botones mismo tamaño */
+  .botones input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
   }
   
   /* Botón login */
   #login input[type="submit"] {
-    padding: 10px;
     border: none;
-    border-radius: 8px;
-  
     background-color: var(--color-primario);
     color: var(--color-fuente2);
     font-weight: bold;
-    cursor: pointer;
-  
     transition: background-color 0.3s;
   }
   
   #login input[type="submit"]:hover {
     background-color: var(--color-hover);
   }
-
-  #login input[type="submit"]:active{
+  
+  #login input[type="submit"]:active {
     background-color: var(--color-action);
   }
   
   /* Botón reset */
   #login input[type="reset"] {
-    padding: 10px;
-    border-radius: 8px;
     border: 1px solid var(--color-auxiliar);
     background-color: white;
-    cursor: pointer;
   }
   
+
   
   /* Link registro */
   #contenedor-login a {
@@ -107,4 +120,25 @@
   
   #contenedor-login a:hover {
     color: var(--color-primario);
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 500px) {
+    #login {
+      width: 100%;
+    }
+  
+    .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .form-group label {
+      width: 100%;
+      text-align: left;
+    }
+  
+    .botones {
+      flex-direction: column;
+    }
   }

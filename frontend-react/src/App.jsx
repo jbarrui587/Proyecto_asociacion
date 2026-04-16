@@ -11,6 +11,7 @@ import Galeria from './pages/galeria'
 import QuienesSomos from './pages/quienes_somos'
 import Contacto from './pages/contacto'
 import Login from './pages/login'
+import Registro from './pages/registro'
 import Legal from './pages/legal'
 import Socio from './pages/socio'
 import NotFound from './pages/notFound'
@@ -43,6 +44,9 @@ function App() {
 
           {/* Ruta Login */}
           <Route path="/login" element={<Login/>}/>
+
+          {/* Ruta Registro */}
+          <Route path="/registro" element={<Registro/>}/>
 
           {/* Ruta Marco Legal */}
           <Route path="/legal" element={<Legal/>}/>

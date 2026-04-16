@@ -1,0 +1,10 @@
+{
+    "username": "adminuser",
+    "password": "Admin123",
+    "nombre": "Admin",
+    "apellidos": "De la App",
+    "dni": "99999999Z",
+    "telefono": "600123213",
+    "email": "admin@asociacion.com",
+    "rol": "admin"
+}
