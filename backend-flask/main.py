@@ -12,10 +12,6 @@ noticias_col = db.obtener_colecciones('Noticias')
 miembros_col = db.obtener_colecciones('Miembros')
 galeria_col = db.obtener_colecciones('Galeria')
 
-@app.route('/')
-def App():
-    return jsonify({"message": "API funcionando"})
-
 @app.route('/api/noticias')
 def get_noticias():
     data = list(noticias_col.find())
@@ -47,10 +43,12 @@ def get_fotos():
 
     
 
-@app.route('/api/fruits')
-def get_fruits():
+@app.route('/api/login')
+def login():
     return  ['Apple','Banana','Cherry']
     
 
 if __name__ ==  '__main__':
-    app.run(debug=True)
+    BaseDatos.inicializar_colecciones(BaseDatos())
+    BaseDatos.insertar_admin(BaseDatos())
+    app.run()

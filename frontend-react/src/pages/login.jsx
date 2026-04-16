@@ -1,19 +1,19 @@
+import "../styles/login.css"
 
 function Login() {
     return (
       <>
-       
-        <main className="contenido">
-          <div className="texto">
-            <h2>Bienvenidos</h2>
-            <p>
-              Texto de la asociación explicando vuestra actividad.
-            </p>
-          </div>
-  
-          <div className="imagen">
-            <img src="/src/assets/images/asoc_7.png" alt="Presentación de la asociación" />
-          </div>
+       <h1>Login</h1>
+        <main id="contenedor-login">
+        <form action="" method="post" id="login">
+            <label htmlFor="username">Username: </label>
+            <input type="text" name="username" id="username" placeholder="Username"/>
+            <label htmlFor="password">Password: </label>
+            <input type="password" name="password" id="password" placeholder="Password" />
+            <input type="submit" value="Log In" />
+            <input type="reset" value="Borrar" />
+        </form>
+        <a href="./registro">Registrate</a>
         </main>
       </>
     )
