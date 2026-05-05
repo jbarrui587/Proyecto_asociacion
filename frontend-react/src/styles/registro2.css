@@ -106,13 +106,14 @@ h1 {
   }
   
   /* link inferior */
-  .card-registro a {
+  .card-registro a, .card-registro #mensaje {
     display: block;
     text-align: center;
     margin-top: 15px;
     color: #1E6091;
     text-decoration: none;
     font-weight: 600;
+
   }
   
   .card-registro a:hover {
