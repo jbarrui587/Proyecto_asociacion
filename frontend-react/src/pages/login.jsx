@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import "../styles/login2.css"
 
 function Login() {
@@ -10,14 +12,14 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("SUBMIT funcionando");
     try {
       const res = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username:username.toLowerCase(), password }),
         credentials: "include"
       });
 
@@ -32,6 +34,7 @@ function Login() {
 
     } catch (err) {
       console.error(err);
+      alert("Error de conexión con el servidor. Asegúrate de que el backend esté ejecutándose.");
     }
   };
     return (
@@ -48,10 +51,14 @@ function Login() {
             <input type="password" value={password} name="password" id="password" onChange={(e) => setPassword(e.target.value)} />
             <div className="botones">
               <input type="submit" value="Log In" />
-              <input type="reset" value="Borrar" />
+              <input type="reset" value="Borrar" onClick={() => {
+                setUsername("");
+                setPassword("");
+                }}
+              />
             </div>
         </form>
-        <a href="./registro">Registrate</a>
+        <Link to="/registro">Regístrate</Link>
         </div>
         </main>
       </>

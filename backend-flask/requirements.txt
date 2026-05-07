@@ -9,5 +9,4 @@ MarkupSafe==3.0.3
 Werkzeug==3.1.5
 pymongo==4.16.0
 passlib==1.7.4
-dotenv
-os
+python-dotenv

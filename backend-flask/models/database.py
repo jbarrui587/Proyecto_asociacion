@@ -16,10 +16,10 @@ class BaseDatos:
 
             self.inicializar_colecciones()
 
-            print("✅ Conexión a MongoDB establecida correctamente.")
+            print("EXITO: Conexión a MongoDB establecida correctamente.")
 
         except Exception as e:
-            print(f"\n❌ Falló la conexión a MongoDB: {e}")
+            print(f"\nERROR: Falló la conexión a MongoDB: {e}")
 
     def inicializar_colecciones(self):
         colecciones = ['Miembros', 'Noticias','Galeria']
@@ -28,7 +28,7 @@ class BaseDatos:
         for coleccion in colecciones:
             if coleccion not in col_existentes:
                 self.db.create_collection(coleccion)
-                print(f"📁 Colección '{coleccion}' creada.")
+                print(f"INFO: Colección '{coleccion}' creada.")
 
     def insertar_admin(self):
         
@@ -50,9 +50,9 @@ class BaseDatos:
                 "rol": "admin"
             }
             self.db['Miembros'].insert_one(usuario_inicial)
-            print("👤 Usuario administrador insertado en la colección 'Miembros'.")
+            print("INFO: Usuario administrador insertado en la colección 'Miembros'.")
         else:
-            print("⚠️ La colección 'Miembros' ya contiene registros.")
+            print("AVISO: La colección 'Miembros' ya contiene registros.")
 
     def insertar_miembro(self, user):
         self.db['Miembros'].insert_one(user)

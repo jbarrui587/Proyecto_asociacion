@@ -5,7 +5,16 @@ from passlib.hash import pbkdf2_sha256
 import re
 
 app = Flask(__name__)
-CORS(app)
+
+app.secret_key = "clave_super_secreta"
+
+CORS(app,
+     supports_credentials=True,
+     origins=["http://localhost:5173"])
+
+
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_SECURE'] = False  # en local
 
 db =BaseDatos()
 
@@ -56,34 +65,30 @@ def login():
 
     username = data.get('username')
     password = data.get('password')
-
-    miembros = db.lista_miembros(miembros_col)
-
-    login_user = None
-
-    for usuario in miembros:
-        if usuario['username'] == username:
-            login_user = usuario
-            break
-
     
-        # Validar si existe el usuario y la contraseña
+    if not username or not password:
+        return jsonify({"success": False, "message": "Faltan datos"}), 400
 
-        if login_user and pbkdf2_sha256.verify(password, login_user['password']):
-            
-            session['username'] = login_user['username']
-            session['rol'] = login_user['rol']
-            session['dni'] = login_user.get('dni')
+    username = username.lower()
 
-            return jsonify({
-                "success": True,
-                "rol": login_user['rol']
-            })
+    login_user = miembros_col.find_one({'username': username})
+
+    if not login_user:
+        return jsonify({"success": False, "message": "Usuario no existe"}), 404
+
+    if not pbkdf2_sha256.verify(password, login_user['password']):
+        return jsonify({"success": False, "message": "Password incorrecta"}), 401
+
+    #  GUARDAR SESIÓN
+    session['username'] = login_user['username']
+    session['rol'] = login_user['rol']
+
+    return jsonify({
+        "success": True,
+        "rol": login_user['rol']
+    })
             
-    return({
-        "success": False,
-        "message":"Credenciales incorrectas"
-    }),401
+
 
 @app.route('/api/registro', methods=['POST'])
 def registro():
@@ -91,7 +96,7 @@ def registro():
     data = request.get_json()
 
     if not data:
-        return jsonify({'error': 'No se recibió JSON válido'}), 400
+        return jsonify({"success": False, "message": "JSON inválido"}), 400
 
     passwd = data.get('password')
 
@@ -107,7 +112,6 @@ def registro():
 
     passwd_hash = pbkdf2_sha256.hash(passwd)
 
-    
     email = data.get('email')
 
     if not email:
@@ -157,6 +161,17 @@ def registro():
     miembros_col.insert_one(dict_usuario)
 
     return jsonify({'mensaje': 'Usuario registrado correctamente'}), 201
+
+@app.route('/api/session', methods=['GET'])
+def session_check():
+    if 'username' in session:
+        return jsonify({
+            "logged": True,
+            "username": session['username'],
+            "rol": session['rol']
+        })
+    return jsonify({"logged": False}), 401
+
 
 if __name__ ==  '__main__':
     BaseDatos.inicializar_colecciones(BaseDatos())
