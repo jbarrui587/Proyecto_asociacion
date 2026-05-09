@@ -1,5 +1,6 @@
 import Carrousel from '../components/carrousel'
 import '../styles/index2.css'
+import imagenAsoc7 from '../assets/images/Asoc_7.png'
 
 function Home() {
   return (
@@ -15,7 +16,7 @@ function Home() {
         </div>
 
         <div id="imagen-home">
-          <img src="/src/assets/images/asoc_7.png" alt="Presentación de la asociación" />
+          <img src={imagenAsoc7} alt="Presentación de la asociación" />
         </div>
       </main>
     </>
