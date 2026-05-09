@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 import "../styles/login2.css"
 
@@ -8,7 +7,24 @@ function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [checking, setChecking] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch(import.meta.env.VITE_API_URL + "/api/session", {
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.logged) {
+          if (data.rol === "admin") navigate("/admin");
+          else navigate("/miembro");
+        } else {
+          setChecking(false);
+        }
+      })
+      .catch(() => setChecking(false));
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +53,11 @@ function Login() {
       alert("Error de conexión con el servidor. Asegúrate de que el backend esté ejecutándose.");
     }
   };
+
+  if (checking) {
+    return <p style={{textAlign: "center", marginTop: "50px"}}>Comprobando sesión...</p>;
+  }
+
     return (
       <>
        <h1>Login</h1>

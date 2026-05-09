@@ -172,11 +172,14 @@ def registro():
 @app.route('/api/session', methods=['GET'])
 def session_check():
     if 'username' in session:
-        return jsonify({
-            "logged": True,
-            "username": session['username'],
-            "rol": session['rol']
-        })
+        user = miembros_col.find_one({'username': session['username']}, {'_id': 0, 'password': 0})
+        if user:
+            return jsonify({
+                "logged": True,
+                "username": session['username'],
+                "rol": session['rol'],
+                "user": user
+            })
     return jsonify({"logged": False}), 401
 
 

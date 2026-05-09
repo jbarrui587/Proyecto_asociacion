@@ -4,21 +4,28 @@ import "../styles/galeria2.css";
 
 function Galeria() {
   const [fotos, setFotos] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     fetch(import.meta.env.VITE_API_URL + "/api/galeria")
       .then(res => res.json())
       .then(data => {
         setFotos(data);
+        setCargando(false);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        setCargando(false);
+      });
   }, []);
 
   return (
     <div className="galeria-container">
       <h1>Galería</h1>
 
-      {fotos.length === 0 ? (
+      {cargando ? (
+        <p style={{textAlign: "center", marginTop: "50px", fontSize: "1.2rem"}}>Cargando fotos desde el servidor... (esto puede tardar unos segundos)</p>
+      ) : fotos.length === 0 ? (
         <p>No hay Fotos</p>
       ) : (
         <div className="galeria">

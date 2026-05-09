@@ -4,22 +4,28 @@ import '../styles/noticias.css';
 
 function Noticias() {
   const [noticias, setNoticias] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     fetch(import.meta.env.VITE_API_URL + "/api/noticias")
       .then(res => res.json())
       .then(data => {
-        
         setNoticias(data);
+        setCargando(false);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        setCargando(false);
+      });
   }, []);
 
   return (
     <div>
       <h1>Noticias y Eventos</h1>
 
-      {noticias.length === 0 ? (
+      {cargando ? (
+        <p style={{textAlign: "center", marginTop: "50px", fontSize: "1.2rem"}}>Cargando noticias desde el servidor... (esto puede tardar unos segundos)</p>
+      ) : noticias.length === 0 ? (
         <p>No hay noticias</p>
       ) : (
         noticias.map((noticia, index) => (
