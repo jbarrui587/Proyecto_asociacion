@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
 import Navbar from "./nav";
-import logo from "../assets/images/logo.png"; // ajusta tu ruta
 
 
 function Header() {
@@ -11,7 +10,7 @@ function Header() {
     <header id="header">
       <div className="header-left">
         <Link to="/" className="logo-link">
-          <img src={logo} alt="Logo" className="logo" />
+          <img src="/images/logo.png" alt="Logo" className="logo" />
         </Link>
 
         <h1>Asociación Abderitana de Aguas Naturales</h1>

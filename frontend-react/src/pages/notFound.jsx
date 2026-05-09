@@ -1,23 +1,15 @@
 
 
 function NotFound() {
-    return (
-      <>
-       
-        <main className="contenido">
-          <div className="texto">
-            <h2>Bienvenidos</h2>
-            <p>
-              Texto de la asociación explicando vuestra actividad.
-            </p>
-          </div>
-  
-          <div className="imagen">
-            <img src="/src/assets/images/asoc_7.png" alt="Presentación de la asociación" />
-          </div>
-        </main>
-      </>
-    )
-  }
-  
-  export default NotFound
+  return (
+    <>
+
+      <main className="contenido">
+        <h1>404</h1>
+        <p>Página no encontrada</p>
+      </main>
+    </>
+  )
+}
+
+export default NotFound
