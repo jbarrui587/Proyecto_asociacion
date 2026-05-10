@@ -274,6 +274,61 @@ def crear_miembro_admin():
 
 
 
+@app.route('/api/miembros/<dni>', methods=['GET'])
+def obtener_miembro(dni):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+    miembro = miembros_col.find_one({'dni': dni.upper()}, {'_id': 0, 'password': 0})
+    if not miembro:
+        return jsonify({"success": False, "message": "Miembro no encontrado"}), 404
+    return jsonify(miembro)
+
+
+@app.route('/api/miembros/<dni>', methods=['PUT'])
+def modificar_miembro(dni):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "JSON inválido"}), 400
+
+    miembro_actual = miembros_col.find_one({'dni': dni.upper()})
+    if not miembro_actual:
+        return jsonify({"error": "Miembro no encontrado"}), 404
+
+    actualizacion = {}
+
+    if data.get('username'):
+        actualizacion['username'] = data['username'].lower()
+    if data.get('nombre'):
+        actualizacion['nombre'] = data['nombre'].title()
+    if data.get('apellidos'):
+        actualizacion['apellidos'] = data['apellidos'].title()
+    if data.get('telefono'):
+        actualizacion['telefono'] = data['telefono']
+    if data.get('email'):
+        email_regex = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
+        if not re.match(email_regex, data['email']):
+            return jsonify({"error": "Formato de email inválido"}), 400
+        actualizacion['email'] = data['email'].lower()
+    if data.get('rol') in ['admin', 'miembro']:
+        actualizacion['rol'] = data['rol']
+
+    # Password opcional: solo se actualiza si se proporciona
+    if data.get('password'):
+        password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$'
+        if not re.match(password_regex, data['password']):
+            return jsonify({"error": "La contraseña debe tener entre 8 y 15 caracteres, incluir mayúsculas, minúsculas y números"}), 400
+        actualizacion['password'] = pbkdf2_sha256.hash(data['password'])
+
+    if not actualizacion:
+        return jsonify({"error": "No hay campos para actualizar"}), 400
+
+    miembros_col.update_one({'dni': dni.upper()}, {'$set': actualizacion})
+    return jsonify({"mensaje": "Miembro actualizado correctamente"})
+
+
 @app.route('/api/miembros/<dni>', methods=['DELETE'])
 def eliminar_miembro(dni):
     if session.get('rol') != 'admin':
@@ -282,6 +337,7 @@ def eliminar_miembro(dni):
     if resultado.deleted_count == 0:
         return jsonify({"success": False, "message": "Miembro no encontrado"}), 404
     return jsonify({"success": True, "message": "Miembro eliminado correctamente"})
+
 
 
 @app.route('/api/session', methods=['GET'])
