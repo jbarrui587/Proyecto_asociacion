@@ -105,8 +105,11 @@ function Gestionar_miembros() {
 
             )}
 
-            <button className="btn-nuevo" onClick={() => navigate("/admin/gestionar_miembros/nuevo")}>Añadir miembro</button>
-            <button className="btn-volver" onClick={() => navigate("/admin")}>Volver al menú</button>
+            <div id="gm-botones-pie">
+                <button className="btn-nuevo" onClick={() => navigate("/admin/gestionar_miembros/nuevo")}>Añadir miembro</button>
+                <button className="btn-volver-admin" onClick={() => navigate("/admin")}>Volver al menú</button>
+            </div>
+
             {/* Modal de confirmación */}
             {confirmarDni && (
                 <div id="gm-overlay">

@@ -1,83 +1,126 @@
 /* ===== CONTENEDOR PRINCIPAL ===== */
 #contenedor-panel {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 40px 30px;
-  
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-  
-    background: #eef7f5;
-    border-radius: 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px 30px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+
+  background: #eef7f5;
+  border-radius: 20px;
+}
+
+/* ===== TARJETAS ===== */
+.gestionar {
+  min-height: 240px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 20px;
+
+  border-left: 4px solid #52B788;
+
+  text-align: center;
+
+  box-shadow:
+    8px 8px 20px rgba(0, 0, 0, 0.08),
+    -8px -8px 20px rgba(255, 255, 255, 0.9);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover tarjeta */
+.gestionar:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    12px 12px 30px rgba(30, 96, 145, 0.15),
+    -10px -10px 25px rgba(255, 255, 255, 1);
+}
+
+/* ===== TEXTO ===== */
+.gestionar p {
+  font-size: 20px;
+  font-weight: 600;
+  color: #184E77;
+  margin-bottom: 20px;
+}
+
+/* ===== BOTÓN / LINK ===== */
+.gestionar a {
+  display: inline-block;
+  padding: 10px 20px;
+
+  background: #52B788;
+  color: white;
+  text-decoration: none;
+
+  border-radius: 10px;
+
+  font-weight: 500;
+
+  transition: all 0.3s ease;
+
+  box-shadow:
+    4px 4px 10px rgba(0, 0, 0, 0.12),
+    -4px -4px 10px rgba(255, 255, 255, 0.8);
+}
+
+/* hover botón */
+.gestionar a:hover {
+  background: #40916C;
+  transform: scale(1.05);
+  box-shadow:
+    6px 6px 18px rgba(40, 150, 100, 0.35),
+    -6px -6px 18px rgba(255, 255, 255, 1);
+}
+
+#btn-logout-admin {
+  display: block;
+  margin: 0 auto 35px auto;
+
+  background: linear-gradient(135deg, #1E6091, #184E77);
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    4px 4px 12px rgba(0, 0, 0, 0.15),
+    -4px -4px 12px rgba(255, 255, 255, 0.7);
+
+  transition: all 0.25s ease;
+}
+
+#btn-logout-admin:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #184E77, #1E6091);
+
+  box-shadow:
+    6px 6px 18px rgba(30, 96, 145, 0.25),
+    -6px -6px 18px rgba(255, 255, 255, 1);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  #contenedor-panel {
+    flex-direction: column;
+    padding: 30px 20px;
   }
-  
-  /* ===== TARJETAS ===== */
+
   .gestionar {
-    flex: 1 1 250px;
-  
-    background: #f8f9fa;
-    padding: 30px;
-    border-radius: 20px;
-  
-    border-left: 4px solid #52B788;
-  
-    text-align: center;
-  
-    box-shadow: 
-      8px 8px 20px rgba(0,0,0,0.08),
-      -8px -8px 20px rgba(255,255,255,0.9);
-  
-    transition: all 0.3s ease;
+    width: 100%;
   }
-  
-  /* Hover bonito */
-  .gestionar:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-      12px 12px 30px rgba(30,96,145,0.15),
-      -10px -10px 25px rgba(255,255,255,1);
-  }
-  
-  /* ===== TEXTO ===== */
-  .gestionar p {
-    font-size: 20px;
-    font-weight: 600;
-    color: #184E77;
-    margin-bottom: 20px;
-  }
-  
-  /* ===== BOTÓN / LINK ===== */
-  .gestionar a {
-    display: inline-block;
-    padding: 10px 20px;
-  
-    background: #52B788;
-    color: white;
-    text-decoration: none;
-  
-    border-radius: 10px;
-  
-    font-weight: 500;
-  
-    transition: all 0.3s ease;
-  }
-  
-  /* hover botón */
-  .gestionar a:hover {
-    background: #40916C;
-    transform: scale(1.05);
-  }
-  
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 768px) {
-    #contenedor-panel {
-      flex-direction: column;
-      padding: 30px 20px;
-    }
-  
-    .gestionar {
-      width: 100%;
-    }
-  }
+}
