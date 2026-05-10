@@ -6,7 +6,7 @@ function Comentarios() {
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + "/api/comentarios")
+        fetch("/api/comentarios")
             .then(res => res.json())
             .then(data => {
                 setComentarios(data);

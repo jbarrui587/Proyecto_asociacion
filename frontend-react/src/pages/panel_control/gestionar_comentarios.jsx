@@ -10,7 +10,7 @@ function GestionarComentarios() {
     const navigate = useNavigate();
 
     const cargarComentarios = () => {
-        fetch(import.meta.env.VITE_API_URL + "/api/comentarios")
+        fetch("/api/comentarios")
             .then(res => res.json())
             .then(data => {
                 setComentarios(data);
@@ -24,7 +24,7 @@ function GestionarComentarios() {
     }, []);
 
     const handleEliminar = (id) => {
-        fetch(import.meta.env.VITE_API_URL + "/api/admin/comentarios/" + id, {
+        fetch("/api/admin/comentarios/" + id, {
             method: "DELETE",
             credentials: "include"
         })

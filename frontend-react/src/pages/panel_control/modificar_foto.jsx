@@ -16,7 +16,7 @@ function Modificar_foto() {
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + "/api/admin/galeria/" + id, {
+        fetch("/api/admin/galeria/" + id, {
             credentials: "include"
         })
             .then(res => res.json())
@@ -50,7 +50,7 @@ function Modificar_foto() {
         setExito(false);
 
         try {
-            const res = await fetch(import.meta.env.VITE_API_URL + "/api/admin/galeria/" + id, {
+            const res = await fetch("/api/admin/galeria/" + id, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

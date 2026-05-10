@@ -31,7 +31,7 @@ function Nueva_foto() {
         }
 
         try {
-            const res = await fetch(import.meta.env.VITE_API_URL + "/api/admin/galeria/nuevo", {
+            const res = await fetch("/api/admin/galeria/nuevo", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

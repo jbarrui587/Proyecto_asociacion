@@ -8,7 +8,7 @@ function Miembro() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + "/api/session", {
+        fetch("/api/session", {
             credentials: "include"
         })
             .then(res => res.json())
@@ -23,7 +23,7 @@ function Miembro() {
     }, [navigate]);
 
     const handleLogout = () => {
-        fetch(import.meta.env.VITE_API_URL + "/api/logout", {
+        fetch("/api/logout", {
             method: "POST",
             credentials: "include"
         })
@@ -39,7 +39,7 @@ function Miembro() {
             return;
         }
 
-        fetch(import.meta.env.VITE_API_URL + "/api/comentarios", {
+        fetch("/api/comentarios", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

@@ -32,7 +32,7 @@ function Nueva_noticia() {
         }
 
         try {
-            const res = await fetch(import.meta.env.VITE_API_URL + "/api/admin/noticias/nuevo", {
+            const res = await fetch("/api/admin/noticias/nuevo", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

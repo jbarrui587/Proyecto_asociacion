@@ -7,7 +7,7 @@ function Admin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + "/api/session", {
+        fetch("/api/session", {
             credentials: "include"
         })
             .then(res => res.json())
@@ -22,7 +22,7 @@ function Admin() {
     }, [navigate]);
 
     const handleLogout = () => {
-        fetch(import.meta.env.VITE_API_URL + "/api/logout", {
+        fetch("/api/logout", {
             method: "POST",
             credentials: "include"
         })

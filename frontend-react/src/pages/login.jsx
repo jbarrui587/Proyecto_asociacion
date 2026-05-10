@@ -11,7 +11,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "/api/session", {
+    fetch("/api/session", {
       credentials: "include"
     })
       .then(res => res.json())
@@ -30,7 +30,7 @@ function Login() {
     e.preventDefault();
     console.log("SUBMIT funcionando");
     try {
-      const res = await fetch(import.meta.env.VITE_API_URL + "/api/login", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

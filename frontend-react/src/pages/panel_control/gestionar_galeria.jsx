@@ -10,7 +10,7 @@ function Gestionar_galeria() {
     const navigate = useNavigate();
 
     const cargarFotos = () => {
-        fetch(import.meta.env.VITE_API_URL + "/api/galeria")
+        fetch("/api/galeria")
             .then(res => res.json())
             .then(data => {
                 setFotos(data);
@@ -24,7 +24,7 @@ function Gestionar_galeria() {
     }, []);
 
     const handleEliminar = (id) => {
-        fetch(import.meta.env.VITE_API_URL + "/api/admin/galeria/" + id, {
+        fetch("/api/admin/galeria/" + id, {
             method: "DELETE",
             credentials: "include"
         })

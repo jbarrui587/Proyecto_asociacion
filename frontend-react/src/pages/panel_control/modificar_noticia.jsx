@@ -17,7 +17,7 @@ function Modificar_noticia() {
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + "/api/admin/noticias/" + id, {
+        fetch("/api/admin/noticias/" + id, {
             credentials: "include"
         })
             .then(res => res.json())
@@ -52,7 +52,7 @@ function Modificar_noticia() {
         setExito(false);
 
         try {
-            const res = await fetch(import.meta.env.VITE_API_URL + "/api/admin/noticias/" + id, {
+            const res = await fetch("/api/admin/noticias/" + id, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

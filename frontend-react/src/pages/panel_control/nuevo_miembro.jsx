@@ -44,7 +44,7 @@ function NuevoMiembro() {
         }
 
         try {
-            const res = await fetch(import.meta.env.VITE_API_URL + "/api/admin/miembros/nuevo", {
+            const res = await fetch("/api/admin/miembros/nuevo", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

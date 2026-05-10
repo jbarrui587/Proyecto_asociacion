@@ -7,7 +7,7 @@ function Noticias() {
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "/api/noticias")
+    fetch("/api/noticias")
       .then(res => res.json())
       .then(data => {
         setNoticias(data);

@@ -78,7 +78,7 @@ h1 {
 #btn-logout-miembro {
     display: block;
     margin: 35px;
-    text-align: right;
+    text-align: end;
     background: linear-gradient(135deg, #1E6091, #184E77);
     color: white;
 

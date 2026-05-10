@@ -10,7 +10,7 @@ function Gestionar_miembros() {
     const navigate = useNavigate();
 
     const cargarMiembros = () => {
-        fetch(import.meta.env.VITE_API_URL + "/api/miembros", {
+        fetch("/api/miembros", {
             credentials: "include"
         })
             .then(res => {
@@ -29,7 +29,7 @@ function Gestionar_miembros() {
     }, []);
 
     const handleEliminar = (dni) => {
-        fetch(import.meta.env.VITE_API_URL + "/api/admin/miembros/" + dni, {
+        fetch("/api/admin/miembros/" + dni, {
             method: "DELETE",
             credentials: "include"
         })

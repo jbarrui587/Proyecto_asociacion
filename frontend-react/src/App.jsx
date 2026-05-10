@@ -36,7 +36,7 @@ import Modificar_noticia from './pages/panel_control/modificar_noticia'
 
 function App() {
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "/api/session", {
+    fetch("/api/session", {
       credentials: "include"
     })
       .then(res => res.json())
