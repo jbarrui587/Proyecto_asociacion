@@ -41,7 +41,7 @@ h1 {
 /* ===== TARJETAS ===== */
 .tarjeta-miembro {
     flex: 1;
-
+    height: 500px;
     background: #f8f9fa;
     padding: 30px;
     border-radius: 20px;
@@ -77,14 +77,13 @@ h1 {
 /* ===== BOTON LOGOUT ===== */
 #btn-logout-miembro {
     display: block;
-    margin: 0 auto 35px auto;
-
+    margin: 35px;
+    text-align: right;
     background: linear-gradient(135deg, #1E6091, #184E77);
     color: white;
 
     border: none;
     border-radius: 12px;
-
     padding: 14px 28px;
     font-size: 15px;
     font-weight: 600;

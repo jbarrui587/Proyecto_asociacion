@@ -65,7 +65,7 @@ function Modificar_miembro() {
         if (password) payload.password = password;
 
         try {
-            const res = await fetch(import.meta.env.VITE_API_URL + "/api/miembros/" + dni, {
+            const res = await fetch(import.meta.env.VITE_API_URL + "/api/admin/miembros/" + dni, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

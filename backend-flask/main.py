@@ -4,6 +4,7 @@ from models.database import BaseDatos
 from flask_cors import CORS
 from passlib.hash import pbkdf2_sha256
 import re
+from bson.objectid import ObjectId
 
 import os
 from dotenv import load_dotenv
@@ -59,6 +60,7 @@ def get_fotos():
     galeria = []
     for foto in data:
         galeria.append({
+            "id": str(foto.get("_id")),
             "imagen": foto.get("imagen"),
             "titulo": foto.get("titulo")
         })
@@ -274,7 +276,7 @@ def crear_miembro_admin():
 
 
 
-@app.route('/api/miembros/<dni>', methods=['GET'])
+@app.route('/api/admin/miembros/<dni>', methods=['GET'])
 def obtener_miembro(dni):
     if session.get('rol') != 'admin':
         return jsonify({"success": False, "message": "Acceso denegado"}), 403
@@ -284,7 +286,7 @@ def obtener_miembro(dni):
     return jsonify(miembro)
 
 
-@app.route('/api/miembros/<dni>', methods=['PUT'])
+@app.route('/api/admin/miembros/<dni>', methods=['PUT'])
 def modificar_miembro(dni):
     if session.get('rol') != 'admin':
         return jsonify({"success": False, "message": "Acceso denegado"}), 403
@@ -329,7 +331,7 @@ def modificar_miembro(dni):
     return jsonify({"mensaje": "Miembro actualizado correctamente"})
 
 
-@app.route('/api/miembros/<dni>', methods=['DELETE'])
+@app.route('/api/admin/miembros/<dni>', methods=['DELETE'])
 def eliminar_miembro(dni):
     if session.get('rol') != 'admin':
         return jsonify({"success": False, "message": "Acceso denegado"}), 403
@@ -337,6 +339,85 @@ def eliminar_miembro(dni):
     if resultado.deleted_count == 0:
         return jsonify({"success": False, "message": "Miembro no encontrado"}), 404
     return jsonify({"success": True, "message": "Miembro eliminado correctamente"})
+
+
+@app.route('/api/admin/galeria/nuevo', methods=['POST'])
+def crear_foto_admin():
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "JSON inválido"}), 400
+
+    titulo = data.get('titulo')
+    imagen = data.get('imagen')
+
+    if not all([titulo, imagen]):
+        return jsonify({"error": "Faltan campos obligatorios"}), 400
+
+    galeria_col.insert_one({
+        'titulo': titulo,
+        'imagen': imagen
+    })
+    return jsonify({"success": True, "mensaje": "Foto añadida correctamente"}), 201
+
+
+@app.route('/api/admin/galeria/<id>', methods=['GET'])
+def obtener_foto(id):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+    try:
+        foto = galeria_col.find_one({'_id': ObjectId(id)})
+        if not foto:
+            return jsonify({"success": False, "message": "Foto no encontrada"}), 404
+        return jsonify({
+            "id": str(foto['_id']),
+            "titulo": foto.get('titulo'),
+            "imagen": foto.get('imagen')
+        })
+    except:
+        return jsonify({"success": False, "message": "ID inválido"}), 400
+
+
+@app.route('/api/admin/galeria/<id>', methods=['PUT'])
+def modificar_foto(id):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "JSON inválido"}), 400
+
+    actualizacion = {}
+    if data.get('titulo'):
+        actualizacion['titulo'] = data['titulo']
+    if data.get('imagen'):
+        actualizacion['imagen'] = data['imagen']
+
+    if not actualizacion:
+        return jsonify({"error": "No hay campos para actualizar"}), 400
+
+    try:
+        resultado = galeria_col.update_one({'_id': ObjectId(id)}, {'$set': actualizacion})
+        if resultado.matched_count == 0:
+            return jsonify({"success": False, "message": "Foto no encontrada"}), 404
+        return jsonify({"success": True, "mensaje": "Foto actualizada correctamente"})
+    except:
+        return jsonify({"success": False, "message": "ID inválido"}), 400
+
+
+@app.route('/api/admin/galeria/<id>', methods=['DELETE'])
+def eliminar_foto(id):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+    try:
+        resultado = galeria_col.delete_one({'_id': ObjectId(id)})
+        if resultado.deleted_count == 0:
+            return jsonify({"success": False, "message": "Foto no encontrada"}), 404
+        return jsonify({"success": True, "message": "Foto eliminada correctamente"})
+    except:
+        return jsonify({"success": False, "message": "ID inválido"}), 400
 
 
 

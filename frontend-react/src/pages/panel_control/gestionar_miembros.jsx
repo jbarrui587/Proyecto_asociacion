@@ -29,7 +29,7 @@ function Gestionar_miembros() {
     }, []);
 
     const handleEliminar = (dni) => {
-        fetch(import.meta.env.VITE_API_URL + "/api/miembros/" + dni, {
+        fetch(import.meta.env.VITE_API_URL + "/api/admin/miembros/" + dni, {
             method: "DELETE",
             credentials: "include"
         })

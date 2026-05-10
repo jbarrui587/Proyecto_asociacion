@@ -26,6 +26,8 @@ import Nuevo_miembro from './pages/panel_control/nuevo_miembro'
 import Modificar_miembro from './pages/panel_control/modificar_miembro'
 
 import Gestionar_galeria from './pages/panel_control/gestionar_galeria'
+import Nueva_foto from './pages/panel_control/nueva_foto'
+import Modificar_foto from './pages/panel_control/modificar_foto'
 import Gestionar_noticias from './pages/panel_control/gestionar_noticias'
 
 
@@ -113,7 +115,31 @@ function App() {
           </RutaProtegida>
         } />
 
+        {/* Gestionar galería */}
+        <Route path="/admin/gestionar_galeria" element={
+          <RutaProtegida rolRequerido="admin">
+            <Gestionar_galeria />
+          </RutaProtegida>
+        } />
 
+        <Route path="/admin/gestionar_galeria/nuevo" element={
+          <RutaProtegida rolRequerido="admin">
+            <Nueva_foto />
+          </RutaProtegida>
+        } />
+
+        <Route path="/admin/gestionar_galeria/:id" element={
+          <RutaProtegida rolRequerido="admin">
+            <Modificar_foto />
+          </RutaProtegida>
+        } />
+
+        {/* Gestionar noticias */}
+        <Route path="/admin/gestionar_noticias" element={
+          <RutaProtegida rolRequerido="admin">
+            <Gestionar_noticias />
+          </RutaProtegida>
+        } />
 
 
 

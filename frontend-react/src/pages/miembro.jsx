@@ -65,10 +65,11 @@ function Miembro() {
         <>
             <h1>Area de miembros</h1>
             <div id="miembro-container">
-                <h2>Bienvenido {datos.username}</h2>
                 <button id="btn-logout-miembro" onClick={handleLogout}>
                     Cerrar sesión
                 </button>
+                <h2>Bienvenido {datos.username}</h2>
+
                 <div id="miembro-grid">
 
                     <div className="tarjeta-miembro">
