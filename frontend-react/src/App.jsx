@@ -5,6 +5,7 @@ import RutaProtegida from './components/ruta_protegida'
 
 import Header from './components/header'
 import Footer from './components/footer'
+import ScrollToTop from './components/scroll_to_top'
 
 import Home from './pages/home'
 import Noticias from './pages/noticias'
@@ -47,6 +48,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Header></Header>
 
 
