@@ -41,10 +41,10 @@ def home():
 def get_noticias():
     data = list(noticias_col.find())
    
-
     noticias = []
     for noticia in data:
         noticias.append({
+            "id": str(noticia.get("_id")),
             "titulo": noticia.get("titulo"),
             "descripcion": noticia.get("descripcion"),
             "imagen": noticia.get("imagen")
@@ -202,8 +202,15 @@ def guardar_comentario():
 
 @app.route('/api/comentarios', methods=['GET'])
 def obtener_comentarios():
-    datos = list(comentarios_col.find({}, {'_id': 0}))
-    return jsonify(datos)
+    datos = list(comentarios_col.find())
+    comentarios = []
+    for c in datos:
+        comentarios.append({
+            "id": str(c.get("_id")),
+            "username": c.get("username"),
+            "comentario": c.get("comentario")
+        })
+    return jsonify(comentarios)
 
 
 @app.route('/api/miembros', methods=['GET'])
@@ -416,6 +423,103 @@ def eliminar_foto(id):
         if resultado.deleted_count == 0:
             return jsonify({"success": False, "message": "Foto no encontrada"}), 404
         return jsonify({"success": True, "message": "Foto eliminada correctamente"})
+    except:
+        return jsonify({"success": False, "message": "ID inválido"}), 400
+
+
+@app.route('/api/admin/noticias/nuevo', methods=['POST'])
+def crear_noticia_admin():
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "JSON inválido"}), 400
+
+    titulo = data.get('titulo')
+    descripcion = data.get('descripcion')
+    imagen = data.get('imagen')
+
+    if not all([titulo, descripcion, imagen]):
+        return jsonify({"error": "Faltan campos obligatorios"}), 400
+
+    noticias_col.insert_one({
+        'titulo': titulo,
+        'descripcion': descripcion,
+        'imagen': imagen
+    })
+    return jsonify({"success": True, "mensaje": "Noticia añadida correctamente"}), 201
+
+
+@app.route('/api/admin/noticias/<id>', methods=['GET'])
+def obtener_noticia(id):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+    try:
+        noticia = noticias_col.find_one({'_id': ObjectId(id)})
+        if not noticia:
+            return jsonify({"success": False, "message": "Noticia no encontrada"}), 404
+        return jsonify({
+            "id": str(noticia['_id']),
+            "titulo": noticia.get('titulo'),
+            "descripcion": noticia.get('descripcion'),
+            "imagen": noticia.get('imagen')
+        })
+    except:
+        return jsonify({"success": False, "message": "ID inválido"}), 400
+
+
+@app.route('/api/admin/noticias/<id>', methods=['PUT'])
+def modificar_noticia(id):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "JSON inválido"}), 400
+
+    actualizacion = {}
+    if data.get('titulo'):
+        actualizacion['titulo'] = data['titulo']
+    if data.get('descripcion'):
+        actualizacion['descripcion'] = data['descripcion']
+    if data.get('imagen'):
+        actualizacion['imagen'] = data['imagen']
+
+    if not actualizacion:
+        return jsonify({"error": "No hay campos para actualizar"}), 400
+
+    try:
+        resultado = noticias_col.update_one({'_id': ObjectId(id)}, {'$set': actualizacion})
+        if resultado.matched_count == 0:
+            return jsonify({"success": False, "message": "Noticia no encontrada"}), 404
+        return jsonify({"success": True, "mensaje": "Noticia actualizada correctamente"})
+    except:
+        return jsonify({"success": False, "message": "ID inválido"}), 400
+
+
+@app.route('/api/admin/noticias/<id>', methods=['DELETE'])
+def eliminar_noticia(id):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+    try:
+        resultado = noticias_col.delete_one({'_id': ObjectId(id)})
+        if resultado.deleted_count == 0:
+            return jsonify({"success": False, "message": "Noticia no encontrada"}), 404
+        return jsonify({"success": True, "message": "Noticia eliminada correctamente"})
+    except:
+        return jsonify({"success": False, "message": "ID inválido"}), 400
+
+
+@app.route('/api/admin/comentarios/<id>', methods=['DELETE'])
+def eliminar_comentario(id):
+    if session.get('rol') != 'admin':
+        return jsonify({"success": False, "message": "Acceso denegado"}), 403
+    try:
+        resultado = comentarios_col.delete_one({'_id': ObjectId(id)})
+        if resultado.deleted_count == 0:
+            return jsonify({"success": False, "message": "Comentario no encontrado"}), 404
+        return jsonify({"success": True, "message": "Comentario eliminado correctamente"})
     except:
         return jsonify({"success": False, "message": "ID inválido"}), 400
 

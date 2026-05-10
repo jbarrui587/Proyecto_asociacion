@@ -24,11 +24,14 @@ import Miembro from './pages/miembro'
 import Gestionar_miembros from './pages/panel_control/gestionar_miembros'
 import Nuevo_miembro from './pages/panel_control/nuevo_miembro'
 import Modificar_miembro from './pages/panel_control/modificar_miembro'
+import GestionarComentarios from './pages/panel_control/gestionar_comentarios'
 
 import Gestionar_galeria from './pages/panel_control/gestionar_galeria'
 import Nueva_foto from './pages/panel_control/nueva_foto'
 import Modificar_foto from './pages/panel_control/modificar_foto'
 import Gestionar_noticias from './pages/panel_control/gestionar_noticias'
+import Nueva_noticia from './pages/panel_control/nueva_noticia'
+import Modificar_noticia from './pages/panel_control/modificar_noticia'
 
 
 function App() {
@@ -138,6 +141,24 @@ function App() {
         <Route path="/admin/gestionar_noticias" element={
           <RutaProtegida rolRequerido="admin">
             <Gestionar_noticias />
+          </RutaProtegida>
+        } />
+
+        <Route path="/admin/gestionar_noticias/nuevo" element={
+          <RutaProtegida rolRequerido="admin">
+            <Nueva_noticia />
+          </RutaProtegida>
+        } />
+
+        <Route path="/admin/gestionar_noticias/:id" element={
+          <RutaProtegida rolRequerido="admin">
+            <Modificar_noticia />
+          </RutaProtegida>
+        } />
+
+        <Route path="/admin/gestionar_comentarios" element={
+          <RutaProtegida rolRequerido="admin">
+            <GestionarComentarios />
           </RutaProtegida>
         } />
 
