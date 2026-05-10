@@ -30,6 +30,7 @@ db =BaseDatos()
 noticias_col = db.obtener_colecciones('Noticias')
 miembros_col = db.obtener_colecciones('Miembros')
 galeria_col = db.obtener_colecciones('Galeria')
+comentarios_col = db.obtener_colecciones('Comentarios')
 
 @app.route('/')
 def home():
@@ -168,6 +169,15 @@ def registro():
     miembros_col.insert_one(dict_usuario)
 
     return jsonify({'mensaje': 'Usuario registrado correctamente'}), 201
+
+
+
+
+@app.route('/api/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return jsonify({"success": True, "message": "Sesión cerrada correctamente"})
+
 
 @app.route('/api/session', methods=['GET'])
 def session_check():

@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +20,15 @@ function Miembro() {
             .catch(() => navigate("/login"));
     }, [navigate]);
 
+    const handleLogout = () => {
+        fetch(import.meta.env.VITE_API_URL + "/api/logout", {
+            method: "POST",
+            credentials: "include"
+        })
+            .then(() => navigate("/login"))
+            .catch(() => navigate("/login"));
+    };
+
     if (!datos) {
         return <p>Cargando área de miembro...</p>;
     }
@@ -30,6 +37,9 @@ function Miembro() {
         <>
             <h1>Area de miembros</h1>
             <h2>Bienvenido {datos.username}</h2>
+            <button id="btn-logout-miembro" onClick={handleLogout}>
+                Cerrar sesión
+            </button>
             <div>
                 <h3>Datos Personales</h3>
                 <p>Nombre: {datos.nombre}</p>
@@ -47,10 +57,7 @@ function Miembro() {
                 </form>
             </div>
         </>
-
-    )
-
+    );
 }
 
-
-export default Miembro
+export default Miembro;
