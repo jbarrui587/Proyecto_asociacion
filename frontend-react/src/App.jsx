@@ -47,135 +47,133 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div id="app-wrapper">
       <ScrollToTop />
       <Header></Header>
 
+      <main id="main-content">
+        <Routes>
+          {/* Ruta Inicio */}
+          <Route path="/" element={<Home />} />
+
+          {/* Ruta Noticias */}
+          <Route path="/noticias" element={<Noticias />} />
+
+          {/* Ruta Comentarios */}
+          <Route path="/comentarios" element={<Comentarios />} />
+
+          {/* Ruta Galería*/}
+          <Route path="/galeria" element={<Galeria />} />
+
+          {/* Ruta Quienes Somos */}
+          <Route path="/quienes_somos" element={<QuienesSomos />} />
+
+          {/* Ruta Contacto */}
+          <Route path="/contacto" element={<Contacto />} />
+
+          {/* Ruta Login */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Ruta Registro */}
+          <Route path="/registro" element={<Registro />} />
+
+          {/* Ruta Marco Legal */}
+          <Route path="/legal" element={<Legal />} />
+
+          {/* Ruta Información de Socio */}
+          <Route path="/socio" element={<Socio />} />
+
+          {/* Ruta Miembro */}
+          <Route path="/miembro" element={
+            <RutaProtegida rolRequerido="miembro">
+              <Miembro />
+            </RutaProtegida>}
+          />
+
+          {/* Ruta Admin */}
+          <Route path="/admin" element={
+            <RutaProtegida rolRequerido="admin">
+              <Admin />
+            </RutaProtegida>}
+          />
+
+          {/* Gestionar miembros */}
+          <Route path="/admin/gestionar_miembros" element={
+            <RutaProtegida rolRequerido="admin">
+              <Gestionar_miembros />
+            </RutaProtegida>
+          } />
 
 
-      <Routes>
-        {/* Ruta Inicio */}
-        <Route path="/" element={<Home />} />
+          {/* Ruta Crear miembro */}
+          <Route path="/admin/gestionar_miembros/nuevo" element={
+            <RutaProtegida rolRequerido="admin">
+              <Nuevo_miembro />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Noticias */}
-        <Route path="/noticias" element={<Noticias />} />
+          {/* Ruta Modificar miembro */}
+          <Route path="/admin/gestionar_miembros/:dni" element={
+            <RutaProtegida rolRequerido="admin">
+              <Modificar_miembro />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Comentarios */}
-        <Route path="/comentarios" element={<Comentarios />} />
+          {/* Gestionar galería */}
+          <Route path="/admin/gestionar_galeria" element={
+            <RutaProtegida rolRequerido="admin">
+              <Gestionar_galeria />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Galería*/}
-        <Route path="/galeria" element={<Galeria />} />
+          <Route path="/admin/gestionar_galeria/nuevo" element={
+            <RutaProtegida rolRequerido="admin">
+              <Nueva_foto />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Quienes Somos */}
-        <Route path="/quienes_somos" element={<QuienesSomos />} />
+          <Route path="/admin/gestionar_galeria/:id" element={
+            <RutaProtegida rolRequerido="admin">
+              <Modificar_foto />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Contacto */}
-        <Route path="/contacto" element={<Contacto />} />
+          {/* Gestionar noticias */}
+          <Route path="/admin/gestionar_noticias" element={
+            <RutaProtegida rolRequerido="admin">
+              <Gestionar_noticias />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Login */}
-        <Route path="/login" element={<Login />} />
+          <Route path="/admin/gestionar_noticias/nuevo" element={
+            <RutaProtegida rolRequerido="admin">
+              <Nueva_noticia />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Registro */}
-        <Route path="/registro" element={<Registro />} />
+          <Route path="/admin/gestionar_noticias/:id" element={
+            <RutaProtegida rolRequerido="admin">
+              <Modificar_noticia />
+            </RutaProtegida>
+          } />
 
-        {/* Ruta Marco Legal */}
-        <Route path="/legal" element={<Legal />} />
-
-        {/* Ruta Información de Socio */}
-        <Route path="/socio" element={<Socio />} />
-
-        {/* Ruta Miembro */}
-        <Route path="/miembro" element={
-          <RutaProtegida rolRequerido="miembro">
-            <Miembro />
-          </RutaProtegida>}
-        />
-
-        {/* Ruta Admin */}
-        <Route path="/admin" element={
-          <RutaProtegida rolRequerido="admin">
-            <Admin />
-          </RutaProtegida>}
-        />
-
-        {/* Gestionar miembros */}
-        <Route path="/admin/gestionar_miembros" element={
-          <RutaProtegida rolRequerido="admin">
-            <Gestionar_miembros />
-          </RutaProtegida>
-        } />
-
-
-        {/* Ruta Crear miembro */}
-        <Route path="/admin/gestionar_miembros/nuevo" element={
-          <RutaProtegida rolRequerido="admin">
-            <Nuevo_miembro />
-          </RutaProtegida>
-        } />
-
-        {/* Ruta Modificar miembro */}
-        <Route path="/admin/gestionar_miembros/:dni" element={
-          <RutaProtegida rolRequerido="admin">
-            <Modificar_miembro />
-          </RutaProtegida>
-        } />
-
-        {/* Gestionar galería */}
-        <Route path="/admin/gestionar_galeria" element={
-          <RutaProtegida rolRequerido="admin">
-            <Gestionar_galeria />
-          </RutaProtegida>
-        } />
-
-        <Route path="/admin/gestionar_galeria/nuevo" element={
-          <RutaProtegida rolRequerido="admin">
-            <Nueva_foto />
-          </RutaProtegida>
-        } />
-
-        <Route path="/admin/gestionar_galeria/:id" element={
-          <RutaProtegida rolRequerido="admin">
-            <Modificar_foto />
-          </RutaProtegida>
-        } />
-
-        {/* Gestionar noticias */}
-        <Route path="/admin/gestionar_noticias" element={
-          <RutaProtegida rolRequerido="admin">
-            <Gestionar_noticias />
-          </RutaProtegida>
-        } />
-
-        <Route path="/admin/gestionar_noticias/nuevo" element={
-          <RutaProtegida rolRequerido="admin">
-            <Nueva_noticia />
-          </RutaProtegida>
-        } />
-
-        <Route path="/admin/gestionar_noticias/:id" element={
-          <RutaProtegida rolRequerido="admin">
-            <Modificar_noticia />
-          </RutaProtegida>
-        } />
-
-        <Route path="/admin/gestionar_comentarios" element={
-          <RutaProtegida rolRequerido="admin">
-            <GestionarComentarios />
-          </RutaProtegida>
-        } />
+          <Route path="/admin/gestionar_comentarios" element={
+            <RutaProtegida rolRequerido="admin">
+              <GestionarComentarios />
+            </RutaProtegida>
+          } />
 
 
 
-        {/* Ruta 404 */}
-        <Route path="*" element={<NotFound />} />
+          {/* Ruta 404 */}
+          <Route path="*" element={<NotFound />} />
 
 
-      </Routes>
+        </Routes>
+      </main>
 
       <Footer></Footer>
-
-
-    </>
+    </div>
   )
 }
 
