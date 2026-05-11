@@ -45,7 +45,7 @@ h1 {
     background: #f8f9fa;
     padding: 30px;
     border-radius: 20px;
-
+    width: 45%;
     border-left: 4px solid #52B788;
 
     box-shadow:
@@ -119,6 +119,8 @@ h1 {
 }
 
 #comentario {
+    width: 100%;
+    box-sizing: border-box;
     resize: vertical;
     min-height: 180px;
 
@@ -233,6 +235,10 @@ h1 {
 
     .tarjeta-miembro {
         padding: 24px;
+        width: 90%;
+        height: 50%;
+        margin: 0 auto;
+
     }
 
     #comentario {
