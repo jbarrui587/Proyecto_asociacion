@@ -27,7 +27,8 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'None' if is_production else 'Lax'
 app.config['SESSION_COOKIE_SECURE'] = is_production
 
 # Configuración de subida de imágenes
-UPLOAD_FOLDER = os.path.join('static', 'uploads')
+basedir = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(basedir, 'static', 'uploads')
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
