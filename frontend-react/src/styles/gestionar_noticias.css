@@ -82,6 +82,13 @@
     vertical-align: middle;
 }
 
+.gn-descripcion-celda {
+    max-width: 300px;
+    font-size: 14px;
+    font-style: italic;
+    color: #6c757d;
+}
+
 #tabla-noticias tbody tr:hover {
     background: #dff3ec;
 }

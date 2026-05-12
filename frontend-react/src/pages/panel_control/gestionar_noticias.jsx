@@ -63,6 +63,7 @@ function Gestionar_noticias() {
                         <thead>
                             <tr>
                                 <th>Título</th>
+                                <th>Descripción</th>
                                 <th>Imagen</th>
                                 <th>Acciones</th>
                             </tr>
@@ -71,6 +72,11 @@ function Gestionar_noticias() {
                             {noticias.map((n) => (
                                 <tr key={n.id}>
                                     <td>{n.titulo}</td>
+                                    <td className="gn-descripcion-celda">
+                                        {n.descripcion.length > 50 
+                                            ? n.descripcion.substring(0, 50) + "..." 
+                                            : n.descripcion}
+                                    </td>
                                     <td>
                                         <img src={n.imagen} alt={n.titulo} className="gn-img-preview" />
                                     </td>
