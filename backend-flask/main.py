@@ -560,13 +560,19 @@ def upload_file():
         return jsonify({"error": "No se seleccionó ningún archivo"}), 400
 
     filename = secure_filename(file.filename)
-        # Añadir timestamp para evitar sobrescribir archivos con el mismo nombre
     name, ext = os.path.splitext(filename)
     filename = f"{name}_{int(time.time())}{ext}"
 
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    print(f"DEBUG: Intentando guardar en: {save_path}")
+    
+    file.save(save_path)
+    
+    if os.path.exists(save_path):
+        print(f"DEBUG: ¡ÉXITO! El archivo existe en el disco. Tamaño: {os.path.getsize(save_path)} bytes")
+    else:
+        print(f"DEBUG: ¡ERROR! El archivo NO existe en el disco después de llamar a save()")
 
-        # Devolvemos la ruta que el frontend usará para mostrar la imagen
     return jsonify({
         "success": True,
         "url": f"/api/uploads/{filename}"
