@@ -575,7 +575,8 @@ def upload_file():
 
     return jsonify({
         "success": True,
-        "url": f"/api/uploads/{filename}"
+        "url": f"/api/uploads/{filename}",
+        "debug_path": save_path
     }), 201
 
 

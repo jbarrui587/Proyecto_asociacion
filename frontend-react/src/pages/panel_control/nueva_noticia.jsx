@@ -37,6 +37,7 @@ function Nueva_noticia() {
             const data = await res.json();
             if (data.success) {
                 setFormData({ ...formData, imagen: data.url });
+                alert("Imagen subida con éxito en:\n" + data.debug_path);
             } else {
                 alert(data.error || "Error al subir la imagen");
             }
