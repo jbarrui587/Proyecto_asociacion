@@ -191,7 +191,7 @@ h1 {
 .btn-upload {
   padding: 10px 15px;
   background: #1E6091;
-  color: rgb(255, 255, 255);
+  color: white !important;
   border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
