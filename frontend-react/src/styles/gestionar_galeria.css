@@ -64,24 +64,22 @@
         -8px -8px 20px rgba(255, 255, 255, 0.9);
 }
 
-/* CABECERA Y CELDAS */
-#tabla-galeria th, #tabla-galeria td {
-    padding: 14px 18px;
-    border-bottom: 1px solid #dee2e6;
-    vertical-align: middle;
-}
-
+/* CABECERA */
 #tabla-galeria th {
     color: white;
+    padding: 16px 18px;
     text-align: left;
     font-size: 15px;
     letter-spacing: 0.4px;
 }
 
-/* Anchos de columna específicos */
-#tabla-galeria th:nth-child(1), #tabla-galeria td:nth-child(1) { width: 50%; } /* Titulo */
-#tabla-galeria th:nth-child(2), #tabla-galeria td:nth-child(2) { width: 25%; text-align: center; } /* Imagen */
-#tabla-galeria th:nth-child(3), #tabla-galeria td:nth-child(3) { width: 25%; text-align: center; } /* Acciones */
+/* FILAS */
+#tabla-galeria td {
+    padding: 14px 18px;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
 
 #tabla-galeria tbody tr:hover {
     background: #dff3ec;
@@ -89,21 +87,18 @@
 
 /* PREVIEW DE IMAGEN */
 .gg-img-preview {
-    width: 70px;
-    height: 50px;
+    width: 80px;
+    height: 60px;
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    display: block;
-    margin: 0 auto;
 }
 
 /* ===== COLUMNA ACCIONES ===== */
 .gg-acciones {
     display: flex;
-    gap: 8px;
-    justify-content: center;
-    white-space: nowrap;
+    gap: 10px;
+    align-items: center;
 }
 
 /* ===== BOTONES ===== */
