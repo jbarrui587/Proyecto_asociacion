@@ -100,11 +100,15 @@
 
 /* ===== COLUMNA ACCIONES ===== */
 .gg-acciones {
+    text-align: center; /* Centrado horizontal */
+    vertical-align: middle !important;
+}
+
+.gg-acciones-div {
     display: flex;
     gap: 10px;
+    justify-content: center;
     align-items: center;
-    height: 100%;
-    justify-content: flex-start;
 }
 
 /* ===== BOTONES ===== */

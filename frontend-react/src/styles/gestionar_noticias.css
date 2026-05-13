@@ -105,10 +105,15 @@
 
 /* ===== COLUMNA ACCIONES ===== */
 .gn-acciones {
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.gn-acciones-div {
     display: flex;
     gap: 10px;
+    justify-content: center;
     align-items: center;
-    height: 100%;
 }
 
 .btn-modificar {

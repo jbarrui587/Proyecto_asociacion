@@ -75,18 +75,20 @@ function Gestionar_galeria() {
                                         <img src={f.imagen} alt={f.titulo} className="gg-img-preview" />
                                     </td>
                                     <td className="gg-acciones">
-                                        <button
-                                            className="btn-modificar"
-                                            onClick={() => navigate("/admin/gestionar_galeria/" + f.id)}
-                                        >
-                                            Modificar
-                                        </button>
-                                        <button
-                                            className="btn-eliminar"
-                                            onClick={() => { setConfirmarId(f.id); setMensaje(null); }}
-                                        >
-                                            Eliminar
-                                        </button>
+                                        <div className="gg-acciones-div">
+                                            <button
+                                                className="btn-modificar"
+                                                onClick={() => navigate("/admin/gestionar_galeria/" + f.id)}
+                                            >
+                                                Modificar
+                                            </button>
+                                            <button
+                                                className="btn-eliminar"
+                                                onClick={() => { setConfirmarId(f.id); setMensaje(null); }}
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

@@ -81,18 +81,20 @@ function Gestionar_noticias() {
                                         <img src={n.imagen} alt={n.titulo} className="gn-img-preview" />
                                     </td>
                                     <td className="gn-acciones">
-                                        <button
-                                            className="btn-modificar"
-                                            onClick={() => navigate("/admin/gestionar_noticias/" + n.id)}
-                                        >
-                                            Modificar
-                                        </button>
-                                        <button
-                                            className="btn-eliminar"
-                                            onClick={() => { setConfirmarId(n.id); setMensaje(null); }}
-                                        >
-                                            Eliminar
-                                        </button>
+                                        <div className="gn-acciones-div">
+                                            <button
+                                                className="btn-modificar"
+                                                onClick={() => navigate("/admin/gestionar_noticias/" + n.id)}
+                                            >
+                                                Modificar
+                                            </button>
+                                            <button
+                                                className="btn-eliminar"
+                                                onClick={() => { setConfirmarId(n.id); setMensaje(null); }}
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
