@@ -5,10 +5,10 @@ Este proyecto es una plataforma integral para la gestión de una asociación. Pe
 
 ## Tecnologías Usadas
 - [Python](https://www.python.org/)
-- [Flask](https://flask.palletsprojects.com/)
-- [MongoDB Atlas](https://www.mongodb.com/)
+- [Flask](https://flask.palletsprojects.com/) (Backend)
+- [MongoDB Atlas](https://www.mongodb.com/) (Base de datos)
 - [React](https://reactjs.org/) (Frontend)
-- [Vite](https://vitejs.dev/) (Build tool)
+- [Vite](https://vitejs.dev/) (Entorno de desarrollo del frontend)
 - [Cloudinary](https://cloudinary.com/) (Almacenamiento de imágenes)
 
 ## Estructura del Proyecto
@@ -43,6 +43,19 @@ Este proyecto es una plataforma integral para la gestión de una asociación. Pe
 └─ README.md                     # Guía principal del proyecto
 ```
 
+## Requisitos
+
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
+
+- **Python** 3.8 o superior.
+- **Node.js** 14.0 o superior.
+- **MongoDB** instalado localmente o una cuenta en **MongoDB Atlas**.
+
+## Clonar el proyecto desde GitHub.
+
+```bash
+git clone https://github.com/jbarrui587/Proyecto_asociacion.git
+``` 
 
 ## Instalación del Entorno de Desarrollo
 ### Backend
@@ -78,6 +91,13 @@ python main.py
 ```bash
 # Dentro de frontend-react
 npm run dev
+```
+
+## Uso de la base de datos
+
+Para poder utilizar la base de datos, se debe crear una instancia en MongoDB Atlas y configurar la variable de entorno MONGO_URL en el archivo .env del backend-flask.
+Hay que instalar MongoDB Compass para poder gestionar la base de datos y hacer las conexiones usando la variable de entorno MONGO_URL. Se puede descargar desde la página oficial de MongoDB. Una vez instalado, se debe crear una conexión a la base de datos usando la variable de entorno MONGO_URL.
+ 
 ```
 
 ## Créditos y Contacto
